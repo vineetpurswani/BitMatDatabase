@@ -47,16 +47,10 @@ public class BitMatRowWritable implements Writable {
 	@Override
 	public void readFields(DataInput in) throws IOException {
 		// TODO Auto-generated method stub
+		Integer rowSize = in.readInt();
 		rowRest = new ArrayList<Long>();
-		try {
-			firstBit = in.readBoolean();
-			while (true) {
-				rowRest.add(in.readLong());
-			}
-		}
-		catch (EOFException e) {
-			e.printStackTrace();
-		}
+		firstBit = in.readBoolean();
+		while (rowSize-- != 0) rowRest.add(in.readLong());
 	}
 	
 	@Override
@@ -73,10 +67,9 @@ public class BitMatRowWritable implements Writable {
 	@Override
 	public void write(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
+		out.writeInt(rowRest.size());
 		out.writeBoolean(firstBit);
-		for (Long i:rowRest) {
-			out.writeLong(i);
-		}
+		for (Long i:rowRest) out.writeLong(i);
 	}
 	
 }
