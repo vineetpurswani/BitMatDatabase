@@ -3,8 +3,11 @@ import java.io.IOException;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 
 public class BitMatIndexingReducer extends Reducer<CompositeKeyWritable, NullWritable, LongWritable, BitMatRowWritable>{
+	private MultipleOutputs<LongWritable, BitMatRowWritable> multipleOutputs; 
+	
 	@Override
 	public void reduce(CompositeKeyWritable key, Iterable<NullWritable> values,
 			Context context) throws IOException, InterruptedException {
@@ -15,15 +18,28 @@ public class BitMatIndexingReducer extends Reducer<CompositeKeyWritable, NullWri
 		
 		for (@SuppressWarnings("unused") NullWritable value : values) {
 			s = key.getSubject();
+			p = key.getPredicate();
 			o = key.getObject();
 			
 			if (lastRowId != s) {
-				if (bmr != null) context.write(new LongWritable(key.getPredicate()), bmr);
+				if (bmr != null) multipleOutputs.write(new LongWritable(p), bmr, "bitmat_"+p); 
+					// context.write(new LongWritable(key.getPredicate()), bmr);
 				bmr = new BitMatRowWritable(s);
 			}
 			bmr.addColumn(o);
 			lastRowId = s;
 		}
-		if (bmr != null) context.write(new LongWritable(key.getPredicate()), bmr);
+		if (bmr != null) multipleOutputs.write(new LongWritable(key.getPredicate()), bmr, "bitmat_"+key.getPredicate()); 
+			// context.write(new LongWritable(key.getPredicate()), bmr);
+	}
+	
+	@Override
+	public void setup(Context context){
+		multipleOutputs = new MultipleOutputs<LongWritable, BitMatRowWritable>(context);
+	}
+	
+	@Override
+	public void cleanup(final Context context) throws IOException, InterruptedException{
+		multipleOutputs.close();
 	}
 }

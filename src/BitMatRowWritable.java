@@ -1,6 +1,5 @@
 import java.io.DataInput;
 import java.io.DataOutput;
-import java.io.EOFException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,6 +46,7 @@ public class BitMatRowWritable implements Writable {
 	@Override
 	public void readFields(DataInput in) throws IOException {
 		// TODO Auto-generated method stub
+		Long rowId = in.readLong();
 		Integer rowSize = in.readInt();
 		rowRest = new ArrayList<Long>();
 		firstBit = in.readBoolean();
@@ -67,6 +67,7 @@ public class BitMatRowWritable implements Writable {
 	@Override
 	public void write(DataOutput out) throws IOException {
 		// TODO Auto-generated method stub
+		out.writeLong(rowId);
 		out.writeInt(rowRest.size());
 		out.writeBoolean(firstBit);
 		for (Long i:rowRest) out.writeLong(i);
