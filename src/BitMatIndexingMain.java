@@ -2,6 +2,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
@@ -9,7 +10,9 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.LazyOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+import org.apache.hadoop.mapreduce.lib.output.SequenceFileAsBinaryOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -39,16 +42,16 @@ public class BitMatIndexingMain extends Configured implements Tool {
 		job.setSortComparatorClass(SecondarySortBasicCompKeySortComparator.class);
 		job.setGroupingComparatorClass(SecondarySortBasicGroupingComparator.class);
 		job.setReducerClass(BitMatIndexingReducer.class);
-		job.setOutputKeyClass(LongWritable.class);
-		job.setOutputValueClass(BitMatRowWritable.class);
+		job.setOutputKeyClass(NullWritable.class);
+		job.setOutputValueClass(BytesWritable.class);
 		
 		/*
 		 * Using MultipleOutputs creates zero-sized default output Ex:
 		 * part-r-00000. To prevent this use LazyOutputFormat
 		 */
 		// job.setOutputFormatClass(SequenceFileOutputFormat.class);
-		LazyOutputFormat.setOutputFormatClass(job, SequenceFileOutputFormat.class);
-		MultipleOutputs.addNamedOutput(job, "SEQ", SequenceFileOutputFormat.class, LongWritable.class, BitMatRowWritable.class);
+		LazyOutputFormat.setOutputFormatClass(job, TextOutputFormat.class);
+		MultipleOutputs.addNamedOutput(job, "byte", TextOutputFormat.class, NullWritable.class, BytesWritable.class);
 		
 		/* This line is to accept input recursively */
 		// FileInputFormat.setInputDirRecursive(job, true);
