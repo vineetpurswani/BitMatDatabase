@@ -1,10 +1,10 @@
+package org.bitmat.indexing;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.hadoop.io.Writable;
-
 
 public class BitMatRowWritable implements Writable {
 
@@ -13,12 +13,15 @@ public class BitMatRowWritable implements Writable {
 	private ArrayList<Long> rowRest;
 	private Long lastCol;
 	
+	public
 	BitMatRowWritable() {
+		rowId = -1L;
 		firstBit = false;
 		rowRest = new ArrayList<Long>();
 		lastCol = -1L;
 	}
 	
+	public
 	BitMatRowWritable(Long id) {
 		rowId = id;
 		firstBit = false;
@@ -26,7 +29,30 @@ public class BitMatRowWritable implements Writable {
 		lastCol = -1L;
 	}
 	
-	public void addColumn(Long index) {
+	@SuppressWarnings("unchecked")
+	public
+	BitMatRowWritable(BitMatRowWritable another) {
+		rowId = another.rowId;
+		firstBit = another.firstBit;
+		rowRest = (ArrayList<Long>) another.rowRest.clone();
+		lastCol = another.lastCol;
+	}
+	
+	public 
+	void clear() {
+		rowId = -1L;
+		firstBit = false;
+		rowRest = new ArrayList<Long>();
+		lastCol = -1L;
+	}
+	
+	public 
+	void setId(Long id) {
+		rowId = id;
+	}
+	
+	public 
+	void addColumn(Long index) {
 		if (index == lastCol+1) {
 			if (index == 0) {
 				firstBit = true;
@@ -44,17 +70,18 @@ public class BitMatRowWritable implements Writable {
 	}
 	
 	@Override
-	public void readFields(DataInput in) throws IOException {
-		// TODO Auto-generated method stub
-		Long rowId = in.readLong();
+	public 
+	void readFields(DataInput in) throws IOException {
+		this.clear();
+		rowId = in.readLong();
 		Integer rowSize = in.readInt();
-		rowRest = new ArrayList<Long>();
 		firstBit = in.readBoolean();
 		while (rowSize-- != 0) rowRest.add(in.readLong());
 	}
 	
 	@Override
-	public String toString() {
+	public 
+	String toString() {
 		String res;
 		res = rowId.toString() + " ";
 		res += String.valueOf(firstBit) + " ";
@@ -65,8 +92,9 @@ public class BitMatRowWritable implements Writable {
 	}
 
 	@Override
-	public void write(DataOutput out) throws IOException {
-		// TODO Auto-generated method stub
+	public 
+	void write(DataOutput out) throws IOException {
+		this.toString();
 		out.writeLong(rowId);
 		out.writeInt(rowRest.size());
 		out.writeBoolean(firstBit);

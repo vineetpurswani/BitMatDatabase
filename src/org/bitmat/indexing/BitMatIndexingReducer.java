@@ -1,3 +1,4 @@
+package org.bitmat.indexing;
 import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
@@ -22,15 +23,15 @@ public class BitMatIndexingReducer extends Reducer<CompositeKeyWritable, NullWri
 			o = key.getObject();
 			
 			if (lastRowId != s) {
-				if (bmr != null) multipleOutputs.write(new LongWritable(p), bmr, "bitmat_"+p); 
-					// context.write(new LongWritable(key.getPredicate()), bmr);
-				bmr = new BitMatRowWritable(s);
+				if (bmr != null) multipleOutputs.write(new LongWritable(p), bmr, "bitmat_"+p);
+				else bmr = new BitMatRowWritable();
+				bmr.clear();
+				bmr.setId(s);
 			}
 			bmr.addColumn(o);
 			lastRowId = s;
 		}
-		if (bmr != null) multipleOutputs.write(new LongWritable(key.getPredicate()), bmr, "bitmat_"+key.getPredicate()); 
-			// context.write(new LongWritable(key.getPredicate()), bmr);
+		if (bmr != null) multipleOutputs.write(new LongWritable(key.getPredicate()), bmr, "bitmat_"+key.getPredicate());
 	}
 	
 	@Override

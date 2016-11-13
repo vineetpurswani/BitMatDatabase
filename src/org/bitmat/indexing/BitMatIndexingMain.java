@@ -1,3 +1,4 @@
+package org.bitmat.indexing;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
@@ -27,7 +28,7 @@ public class BitMatIndexingMain extends Configured implements Tool {
 		job.setJobName("BitMatIndexing");
 
 		Path outputFilePath = new Path(args[1]);
-		
+
 		job.setJarByClass(BitMatIndexingMain.class);
 		FileInputFormat.setInputPaths(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
@@ -41,7 +42,7 @@ public class BitMatIndexingMain extends Configured implements Tool {
 		job.setReducerClass(BitMatIndexingReducer.class);
 		job.setOutputKeyClass(LongWritable.class);
 		job.setOutputValueClass(BitMatRowWritable.class);
-		
+
 		/*
 		 * Using MultipleOutputs creates zero-sized default output Ex:
 		 * part-r-00000. To prevent this use LazyOutputFormat
@@ -49,10 +50,10 @@ public class BitMatIndexingMain extends Configured implements Tool {
 		// job.setOutputFormatClass(SequenceFileOutputFormat.class);
 		LazyOutputFormat.setOutputFormatClass(job, SequenceFileOutputFormat.class);
 		MultipleOutputs.addNamedOutput(job, "SEQ", SequenceFileOutputFormat.class, LongWritable.class, BitMatRowWritable.class);
-		
+
 		/* This line is to accept input recursively */
 		// FileInputFormat.setInputDirRecursive(job, true);
-		
+
 		/*
 		 * Delete output filepath if already exists
 		 */
