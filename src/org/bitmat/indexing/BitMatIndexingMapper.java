@@ -1,3 +1,4 @@
+package org.bitmat.indexing;
 import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
