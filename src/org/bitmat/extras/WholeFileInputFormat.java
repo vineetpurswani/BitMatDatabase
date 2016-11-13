@@ -1,4 +1,4 @@
-package org.bitmat.querying;
+package org.bitmat.extras;
 import java.io.IOException;
 
 import org.apache.hadoop.fs.Path;

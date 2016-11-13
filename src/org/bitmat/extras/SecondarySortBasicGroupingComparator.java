@@ -1,4 +1,4 @@
-package org.bitmat.indexing;
+package org.bitmat.extras;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 

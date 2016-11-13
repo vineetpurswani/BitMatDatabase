@@ -7,6 +7,7 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
+import org.bitmat.extras.BitMatWritable;
 
 
 public class BitMatQueryingMapper extends Mapper<Text, BitMatWritable, NullWritable, NullWritable> {

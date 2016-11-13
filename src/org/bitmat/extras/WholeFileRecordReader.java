@@ -1,4 +1,4 @@
-package org.bitmat.querying;
+package org.bitmat.extras;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,7 +17,6 @@ import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
-import org.bitmat.indexing.BitMatRowWritable;
 
 
 public class WholeFileRecordReader extends RecordReader<Text, BitMatWritable> {

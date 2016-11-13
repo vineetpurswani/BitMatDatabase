@@ -1,4 +1,4 @@
-package org.bitmat.indexing;
+package org.bitmat.extras;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Partitioner;
 

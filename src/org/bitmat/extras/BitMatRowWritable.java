@@ -1,4 +1,4 @@
-package org.bitmat.indexing;
+package org.bitmat.extras;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;

@@ -9,6 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.bitmat.extras.WholeFileInputFormat;
 
 
 public class BitMatQueryingMain extends Configured implements Tool {
@@ -22,7 +23,7 @@ public class BitMatQueryingMain extends Configured implements Tool {
 		Path outputFilePath = new Path(args[1]);
 		Job job = new Job(getConf(), "Map-Only Job");
 		job.setJarByClass(BitMatQueryingMain.class);
-		
+
 		job.setMapOutputKeyClass(NullWritable.class);
 		job.setMapOutputValueClass(NullWritable.class);
 
@@ -43,15 +44,15 @@ public class BitMatQueryingMain extends Configured implements Tool {
 		if (fs.exists(outputFilePath)) {
 			fs.delete(outputFilePath, true);
 		}
-		
+
 		boolean success = job.waitForCompletion(true);
 		return(success ? 0 : 1);
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 		int exitCode = ToolRunner.run(conf, new BitMatQueryingMain(), args);
 		System.exit(exitCode);
 	}
-	
+
 }
