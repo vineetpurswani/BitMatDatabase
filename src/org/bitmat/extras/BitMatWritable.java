@@ -8,8 +8,8 @@ import org.apache.hadoop.io.Writable;
 
 
 public class BitMatWritable implements Writable {
-	private ArrayList<BitMatRowWritable> rows;
-	private Long matId;
+	public ArrayList<BitMatRowWritable> rows;
+	public Long matId;
 
 	BitMatWritable() {
 		rows = new ArrayList<BitMatRowWritable>();
