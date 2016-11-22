@@ -94,6 +94,7 @@ public class BitMatRowWritable implements Writable {
 	@Override
 	public 
 	void write(DataOutput out) throws IOException {
+//		System.out.println(this.toString());
 		this.toString();
 		out.writeLong(rowId);
 		out.writeInt(rowRest.size());

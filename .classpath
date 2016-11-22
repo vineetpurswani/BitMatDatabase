@@ -5,6 +5,32 @@
 	<classpathentry kind="lib" path="/usr/local/hadoop/share/hadoop/common/hadoop-common-2.7.3.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.3.jar"/>
 	<classpathentry kind="lib" path="/usr/local/hadoop/share/hadoop/tools/lib/commons-logging-1.1.3.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/BitMatExtras"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-core-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-arq-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/collection-0.6.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/commons-cli-1.3.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/commons-csv-1.3.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/httpclient-cache-4.5.2.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jackson-annotations-2.7.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jackson-core-2.7.4.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jackson-databind-2.7.4.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jcl-over-slf4j-1.7.21.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-base-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-cmds-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-iri-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-shaded-guava-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jena-tdb-3.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/jsonld-java-0.8.3.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/libthrift-0.9.3.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/slf4j-log4j12-1.7.21.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/share/jena/apache/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -22,7 +22,7 @@ public class StringSerialization {
 	}
 
 	/** Write the object to a Base64 string. */
-	public static String toString( Serializable o ) throws IOException {
+	public static String toString(Serializable o) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream( baos );
 		oos.writeObject(o);
@@ -30,6 +30,21 @@ public class StringSerialization {
 		return Base64.getEncoder().encodeToString(baos.toByteArray()); 
 	}
 
+	public static byte[] toByteArray(Serializable o) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream( baos );
+		oos.writeObject(o);
+		oos.close();
+		return baos.toByteArray();
+	}
+	
+	public static Object fromByteArray(byte[] data) throws IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
+		Object o  = ois.readObject();
+		ois.close();
+		return o;
+	}
+	
 	public static void main (String[] args) throws IOException, ClassNotFoundException {
 		HashMap<String, ArrayList<Integer>> tpmap = new HashMap<String, ArrayList<Integer>>();
 		tpmap.put("hey", new ArrayList(Arrays.asList(1,2,3)));
