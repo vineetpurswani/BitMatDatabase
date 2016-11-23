@@ -54,9 +54,9 @@ public class BitMatIndexingReducer extends Reducer<CompositeKeyWritable, NullWri
 		
 		Path metaFile = new Path("/"+FileOutputFormat.getOutputPath(context).getName()+"/bitmat_"+key.getPredicate()+".meta");
 		FileSystem fs = metaFile.getFileSystem(context.getConfiguration());
-		SequenceFile.Writer mout = new SequenceFile.Writer(fs, context.getConfiguration(), metaFile, Text.class, BytesWritable.class);
-		mout.append(new Text("Row Vector"), new BytesWritable(StringSerialization.toByteArray(rowVector)));
-		mout.append(new Text("Column Vector"), new BytesWritable(StringSerialization.toByteArray(columnVector)));
+		SequenceFile.Writer mout = new SequenceFile.Writer(fs, context.getConfiguration(), metaFile, LongWritable.class, BitMatRowWritable.class);
+		mout.append(new LongWritable(-1L), new BitMatRowWritable(-1L, rowVector));
+		mout.append(new LongWritable(-2L), new BitMatRowWritable(-2L, columnVector));
 		mout.close();
 		
 //		System.out.println(rowVector);
